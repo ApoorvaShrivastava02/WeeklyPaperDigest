@@ -1,0 +1,9 @@
+requests
+tavily-python
+groq
+python-dateutil
+python-dotenv
+langchain
+langchain-core
+pydantic
+pandas

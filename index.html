@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weekly Paper Picks</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg: #0b0c10;
+      --panel: #11131a;
+      --panel2: #0f1117;
+      --text: #e7e9ee;
+      --muted: #a7afc0;
+      --border: rgba(255,255,255,.10);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+      --maxw: 1100px;
+      --accent: #7aa2ff;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f7fb;
+        --panel:#ffffff;
+        --panel2:#f2f4fa;
+        --text:#121521;
+        --muted:#5c647a;
+        --border: rgba(10,20,40,.10);
+        --shadow: 0 10px 25px rgba(20,30,60,.10);
+        --accent:#315efb;
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .wrap{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 22px 16px 44px;
+    }
+
+    #weeklyTopic{
+        font-weight: 600;
+        color: var(--accent);
+      }
+    
+    header{
+      margin-bottom: 16px;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    h1{
+      font-size: 22px;
+      margin: 0;
+      letter-spacing: 0.2px;
+    }
+
+    .tagline{
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .meta{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items:center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .topicHeader{
+      margin-top: 18px;
+      margin-bottom: 10px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .topicHeader h2{
+      font-size: 14px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: .2px;
+      text-transform: capitalize;
+    }
+
+    .topicHeader .count{
+      font-size: 12px;
+      color: var(--muted);
+      padding: 6px 10px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    .grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 12px;
+    }
+
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display:flex;
+      flex-direction: column;
+      min-height: 120px;
+    }
+
+    .cardBody{
+      padding: 14px 14px 12px;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cardTitle{
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    .cardTitle a{
+      color: var(--text);
+      text-decoration: none;
+    }
+    .cardTitle a:hover{ text-decoration: underline; }
+
+    .cardSub{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 6px;
+      padding: 4px 8px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .excerpt{
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .cardFooter{
+      margin-top:auto;
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 14px 12px;
+      border-top: 1px solid var(--border);
+      background: linear-gradient(180deg, transparent, rgba(0,0,0,.04));
+    }
+
+    .btnRow{
+      display:flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap: 8px;
+      padding: 8px 10px;
+      font-size: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--panel2);
+      color: var(--text);
+      cursor:pointer;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .btn:hover{ border-color: rgba(255,255,255,.22); }
+    @media (prefers-color-scheme: light){
+      .btn:hover{ border-color: rgba(10,20,40,.22); }
+    }
+
+    .btn.primary{
+      border-color: color-mix(in oklab, var(--accent) 45%, var(--border));
+      background: color-mix(in oklab, var(--accent) 14%, var(--panel2));
+    }
+
+    .smallMuted{ color: var(--muted); font-size: 12px; }
+
+    .error{
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,80,80,.25);
+      background: rgba(255,80,80,.08);
+      color: var(--text);
+    }
+    .hint{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: pre-wrap;
+    }
+
+    .spacer{ height: 6px; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Weekly Research Paper Picks</h1>
+      <p class="tagline">What I’m reading this week.</p>
+      <p class="tagline" id="weeklyTopic">Topic: Loading…</p>
+      <div class="meta">
+        <span class="chip" id="stats">Loading…</span>
+        <span class="chip" id="lastUpdated"></span>
+      </div>
+    </header>
+
+    <main id="app"></main>
+  </div>
+
+  <script>
+    // Data files in /data
+    const DATA_URL  = new URL("data/recommendations.json", window.location.href).href;
+    const TOPIC_URL = new URL("data/topic.txt", window.location.href).href;
+
+    const app = document.getElementById("app");
+    const stats = document.getElementById("stats");
+    const lastUpdated = document.getElementById("lastUpdated");
+    const weeklyTopic = document.getElementById("weeklyTopic");
+
+    function safeText(s){ return (s ?? "").toString(); }
+
+    function escapeHtml(str){
+      return safeText(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+    function escapeAttr(str){ return escapeHtml(str).replaceAll("`","&#096;"); }
+
+    function domainFromUrl(u){
+      try { return new URL(u).hostname.replace(/^www\./,""); }
+      catch { return ""; }
+    }
+
+    function groupByRelatedTopics(papers){
+      const grouped = new Map();
+      for (const p of papers){
+        const topics = Array.isArray(p.related_topics) ? p.related_topics : [];
+        const key = (topics[0] || "General").trim() || "General";
+        if (!grouped.has(key)) grouped.set(key, []);
+        grouped.get(key).push(p);
+      }
+      return grouped;
+    }
+
+    function render(papers){
+      stats.textContent = `${papers.length} paper(s)`;
+      app.innerHTML = "";
+
+      if (!papers.length){
+        app.innerHTML = `<div class="error">No papers found in recommendations.json.</div>`;
+        return;
+      }
+
+      const grouped = groupByRelatedTopics(papers);
+
+      for (const [topic, list] of grouped.entries()){
+        const header = document.createElement("div");
+        header.className = "topicHeader";
+        header.innerHTML = `<h2>${escapeHtml(topic)}</h2><div class="count">${list.length} paper(s)</div>`;
+        app.appendChild(header);
+
+        const grid = document.createElement("div");
+        grid.className = "grid";
+
+        for (const p of list){
+          const url = safeText(p.url);
+          const title = safeText(p.paper_title) || url || "Untitled";
+          const host = domainFromUrl(url);
+          const summary = safeText(p.paper_summary);
+          const relevance = safeText(p.relevance);
+          const extraTopics = Array.isArray(p.related_topics) ? p.related_topics.slice(1) : [];
+
+          const card = document.createElement("article");
+          card.className = "card";
+          card.innerHTML = `
+            <div class="cardBody">
+              <h3 class="cardTitle">
+                <a href="${escapeAttr(url)}" target="_blank" rel="noreferrer noopener">${escapeHtml(title)}</a>
+              </h3>
+
+              <div class="cardSub">
+                ${host ? `<span class="tag">🌐 ${escapeHtml(host)}</span>` : ""}
+                ${extraTopics.slice(0,2).map(t => `<span class="tag"># ${escapeHtml(t)}</span>`).join("")}
+              </div>
+
+              <p class="excerpt">${escapeHtml(summary || relevance || "No summary available.")}</p>
+            </div>
+
+            <div class="cardFooter">
+              <div class="btnRow">
+                ${url ? `<a class="btn primary" href="${escapeAttr(url)}" target="_blank" rel="noreferrer noopener">Open</a>` : ""}
+                ${url ? `<button class="btn" data-copy="${escapeAttr(url)}">Copy link</button>` : ""}
+              </div>
+              <div class="smallMuted">${escapeHtml(topic)}</div>
+            </div>
+          `;
+          grid.appendChild(card);
+        }
+
+        app.appendChild(grid);
+        const spacer = document.createElement("div");
+        spacer.className = "spacer";
+        app.appendChild(spacer);
+      }
+
+      app.querySelectorAll("button[data-copy]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const u = btn.getAttribute("data-copy") || "";
+          try{
+            await navigator.clipboard.writeText(u);
+            btn.textContent = "Copied ✓";
+            setTimeout(()=> btn.textContent = "Copy link", 1200);
+          }catch{
+            btn.textContent = "Copy failed";
+            setTimeout(()=> btn.textContent = "Copy link", 1200);
+          }
+        });
+      });
+    }
+
+    async function loadWeeklyTopic(){
+      try{
+        const res = await fetch(TOPIC_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const topic = (await res.text()).trim();
+        weeklyTopic.textContent = `Topic: ${topic || "General"}`;
+      }catch{
+        weeklyTopic.textContent = "Topic: General";
+      }
+    }
+
+    async function loadPapers(){
+      try{
+        const res = await fetch(DATA_URL, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Failed to fetch ${DATA_URL} (HTTP ${res.status})`);
+
+        const text = await res.text();
+        let data;
+        try { data = JSON.parse(text); }
+        catch(e){ throw new Error(`recommendations.json is not valid JSON.\n${e.message}`); }
+
+        if (!Array.isArray(data)){
+          throw new Error(`Expected JSON to be a list/array, but got: ${typeof data}`);
+        }
+
+        lastUpdated.textContent = `Updated: ${new Date().toLocaleString()}`;
+        render(data);
+      }catch(err){
+        app.innerHTML = `<div class="error">
+          Could not load <code>data/recommendations.json</code>.
+          <div class="hint">${escapeHtml(err.message)}</div>
+          <div class="hint">Don’t open via <code>file:///</code>. Use GitHub Pages or run <code>python -m http.server</code>.</div>
+        </div>`;
+        stats.textContent = "Load failed";
+      }
+    }
+
+    // Load both (independent)
+    loadWeeklyTopic();
+    loadPapers();
+  </script>
+</body>
+</html>
