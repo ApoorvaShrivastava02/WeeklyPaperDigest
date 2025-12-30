@@ -1,1 +1,1 @@
-Intrinsic motivation for exploration in deep reinforcement learning
+Self-Supervised Contrastive Losses for Vision Transformers
